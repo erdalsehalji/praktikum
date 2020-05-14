@@ -1,0 +1,14 @@
+
+function dayOfYear(year, month, day) {
+    let months = [31,29,31,30,31,30,31,31,30,31,30,31]
+    let count = 0
+    if(year % 4 === 0){
+        months[1] = - 1 
+    }    
+    for(let i = 1; i < month; i++){
+        count += months[i -1]
+    }
+    count += day
+    return count + ". day of the year"
+}
+console.log(dayOfYear(2000,2,1))
