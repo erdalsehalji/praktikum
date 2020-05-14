@@ -1,0 +1,90 @@
+console.log("MAP")
+let num = [1,2,3,4,5,3]
+let mNum = num.map((num) => {
+    return num * 2
+  })
+console.log(mNum)
+
+let days = [
+  "mon", "tue", "tue", "wed", "fri"
+]
+let mdays = days.map((days) => {
+  return days.substring(0,1)
+})
+console.log(mdays)
+
+let people = [
+  {
+  name: "Jack",
+  surname: "Nack",
+  age: "21"
+  },
+  {
+   name: "Nik",
+  surname: "Nok",
+  age: "200"
+  },
+  {
+   name: "Ceso",
+  surname: "Na",
+  age: "20"
+  },
+]
+let mpeople = people.map((people) => {
+  return  `${people.name} ${people.surname} ${people.age}`
+})
+console.log(mpeople)
+console.log("REDUCE")
+let arr = [1,2,3,4,345]
+let sum = arr.reduce((sum, number) => {
+  sum += number
+  return sum
+}, 0)
+
+console.log(sum)
+
+let price = [2545.54, 434.54, 424.34]
+let avgPrice = price.reduce((avarage, price, index, array) => {
+    avarage = price / array.length
+    return avarage;
+}, 0)
+console.log(avgPrice)
+
+
+let fruits = ["banana", "orange", "banana", "apple", "banana", "strawberry"]
+let numFruits = fruits.reduce((count, fruit) => {
+   if(count.hasOwnProperty(fruit)) {
+     count[fruit]++
+   }
+   else {
+    count[fruit] = 1
+   }
+   return count
+}, {})
+console.log(numFruits)
+console.log("FILTER")
+
+let numbs = [1,3,52,623,324,456]
+let even = numbs.filter((numbs) =>{
+  return numbs % 2 === 0
+})
+console.log(even)
+
+let day = [
+  "monday",
+  "tueday",
+  "wednesday",
+  "thursday",
+  "friday",
+  "saturday",
+  "sunday"
+]
+let tDay = day.filter(day => {
+  return day.charAt(0) ==="t"
+})
+
+console.log(tDay)
+
+let genres = ["pop", "jazz", "metal", "vapor-wawe", "country"]
+let rate = genres.filter(genre => genre.includes("wawe"))
+console.log(rate)
