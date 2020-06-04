@@ -1,0 +1,79 @@
+<script>
+// svaka ziva celija koja ima manje od 2 ziva susjeda umire, svaka ziva celija koja ima 2 ili 3 ziva susjeda prezivljava , svaka ziva celija koja ima vise od 3 ziva susjeda umire, svaka mrtva celija sa tocno tri ziva susjeda postaje ziva
+var x_axis = 400; 
+var y_axis = 400;
+var coordinate_of_cell = cell_array(y_axis);
+var m = cell_array(y_axis);
+
+//rnd num generator and cells initial state
+for (var x = 0; x < x_axis; x++) { 
+    for (var y = 0; y < y_axis; y++) { 
+        var random_number = Math.floor(Math.random()*2); 
+        if (random_number === 1) {
+            coordinate_of_cell[x][y] = 1; 
+        } else {
+            coordinate_of_cell[x][y] = 0; 
+        }      
+    }
+}
+
+//graphical interface, animation and main function call
+function edit_animation_style() {
+    var graphical_interface = document.getElementById("myCanvas"); 
+    var graphical_interface_content = graphical_interface.getContext("2d"); 
+    graphical_interface_content.clearRect(0, 0, x_axis, y_axis);
+    for (var x = 1; x < x_axis; x++) { 
+        for (var y = 1; y < y_axis; y++) { 
+            if (coordinate_of_cell[x][y] === 1) {
+                graphical_interface_content.fillStyle = "#FFb1111";
+                graphical_interface_content.fillRect(x, y, 1 , 1); 
+            }
+        }
+    }
+    edit_cells_behavior(requestAnimationFrame(edit_animation_style));
+}
+
+//array filler
+function cell_array(y_axis) {
+    var arr = [];
+    for (var i = 0; i < y_axis  ; i++) {
+        arr[i] = [];
+    }
+    return arr;
+}
+
+function edit_cells_behavior() { 
+    for (var x = 1; x < x_axis - 1; x++) { 
+        for (var y = 1; y < y_axis - 1; y++) {
+            var switch_statement = (coordinate_of_cell[x - 1][y - 1] + coordinate_of_cell[x - 1][y] + coordinate_of_cell[x - 1][y + 1] + coordinate_of_cell[x][y - 1] +
+                 coordinate_of_cell[x][y + 1] + coordinate_of_cell[x + 1][y - 1] + coordinate_of_cell[x + 1][y] + coordinate_of_cell[x + 1][y + 1])   
+        if (coordinate_of_cell[x][y] === 0) {
+            switch (switch_statement) {                 
+                    case 3: m[x][y] = 1; break;              
+                    default: m[x][y] = 0;
+                }
+            } 
+        else if (coordinate_of_cell[x][y] === 1) {
+            switch (switch_statement) {
+                    case 0: m[x][y] = 0; break;
+                    case 1: m[x][y] = 0; break;
+                    case 2: m[x][y] = 1; break;
+                    case 3: m[x][y] = 1; break;                  
+                    default: m[x][y] = 0;      
+                }
+            }
+        }
+    }
+    for (var x = 0; x < x_axis; x++) {
+        for (var y = 0; y < y_axis; y++) {
+            coordinate_of_cell[x][y] = m[x][y];
+        }
+    }
+}
+
+</script>
+<html>
+    <body onload="edit_animation_style()">
+        <canvas id="myCanvas" width="400" height="400"></canvas>
+    </body>
+</html>
